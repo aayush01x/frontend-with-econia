@@ -1,0 +1,35 @@
+{
+  "name": "@econia-labs/sdk",
+  "version": "0.0.1",
+  "description": "TypeScript SDK for Econia",
+  "main": "dist/src/index.js",
+  "typings": "dist/src/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "check": "tsc --noEmit",
+    "lint": "eslint . --ignore-path .eslintignore --fix --ext .ts",
+    "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\" --ignore-unknown --no-error-on-unmatched-pattern",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "type": "module",
+  "dependencies": {
+    "@aptos-labs/ts-sdk": "^1.13.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.2.3",
+    "@typescript-eslint/eslint-plugin": "^5.58.0",
+    "@typescript-eslint/parser": "^5.58.0",
+    "eslint": "^8.41.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
+    "prettier": "^2.8.7",
+    "typescript": "^5.0.4"
+  },
+  "packageManager": "pnpm@9.1.0+sha512.67f5879916a9293e5cf059c23853d571beaf4f753c707f40cb22bed5fb1578c6aad3b6c4107ccb3ba0b35be003eb621a16471ac836c87beb53f9d54bb4612724"
+}
