@@ -97,7 +97,7 @@ export const RegisterAccountContent: React.FC<RegisterAccountContentProps> = ({
             return;
           }
           const payload = entryFunctions.registerMarketAccount(
-            ECONIA_ADDR,
+            ECONIA_ADDR as string,
             TypeTag.fromApiCoin(selectedMarket.base).toString(),
             TypeTag.fromApiCoin(selectedMarket.quote).toString(),
             BigInt(selectedMarket.market_id),

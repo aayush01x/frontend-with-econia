@@ -85,7 +85,7 @@ export const InitialContent: React.FC<{
           onClick={async () => {
             if (!selectedMarket?.base) return;
             const payload = entryFunctions.registerMarketAccount(
-              ECONIA_ADDR,
+              ECONIA_ADDR as string,
               TypeTag.fromApiCoin(selectedMarket.base).toString(),
               TypeTag.fromApiCoin(selectedMarket.quote).toString(),
               BigInt(selectedMarket.market_id),

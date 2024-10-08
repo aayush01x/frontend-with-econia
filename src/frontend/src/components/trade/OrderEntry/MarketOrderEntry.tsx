@@ -81,7 +81,7 @@ export const MarketOrderEntry: React.FC<{
 
   const { data: takerFeeDivisor } = useQuery(["takerFeeDivisor"], async () => {
     try {
-      return await viewFunctions.getTakerFeeDivisor(aptosClient, ECONIA_ADDR);
+      return await viewFunctions.getTakerFeeDivisor(aptosClient, ECONIA_ADDR as string);
     } catch (e) {
       return 2000;
     }
@@ -181,7 +181,7 @@ export const MarketOrderEntry: React.FC<{
     const orderSide = orderSideMap[side];
 
     const payload = entryFunctions.placeMarketOrderUserEntry(
-      ECONIA_ADDR,
+      ECONIA_ADDR as string,
       TypeTag.fromApiCoin(marketData.base).toString(),
       TypeTag.fromApiCoin(marketData.quote).toString(),
       BigInt(marketData.market_id),

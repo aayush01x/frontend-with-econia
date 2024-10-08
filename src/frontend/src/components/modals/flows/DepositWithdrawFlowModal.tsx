@@ -36,7 +36,7 @@ export const DepositWithdrawFlowModal: React.FC<Props> = ({
       }
       const isRegistered = await viewFunctions.hasMarketAccountByMarketId(
         aptosClient,
-        ECONIA_ADDR,
+        ECONIA_ADDR as string,
         account.address,
         BigInt(selectedMarket.market_id),
       );
