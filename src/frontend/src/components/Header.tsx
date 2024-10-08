@@ -232,8 +232,7 @@ const HeaderMobile = ({
           href={logoHref}
           onClick={closeMenu}
           className="scale-101 hover:scale-96 transform transition duration-300"
-        >
-        </Link>
+        ></Link>
       </div>
 
       <div className="flex h-[69px] items-center  gap-5">

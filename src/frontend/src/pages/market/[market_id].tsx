@@ -166,9 +166,7 @@ export default function Market({ allMarketData, marketData }: Props) {
             <div className="border border-neutral-600">
               <OrderEntry
                 marketData={marketData}
-                onDepositWithdrawClick={() =>
-                  setDepositWithdrawModalOpen(true)
-                }
+                onDepositWithdrawClick={() => setDepositWithdrawModalOpen(true)}
               />
             </div>
             <div className="scrollbar-none mt-3 h-full max-h-full grid-rows-none overflow-hidden border border-neutral-600">

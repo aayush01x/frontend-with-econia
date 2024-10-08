@@ -17,13 +17,25 @@ const SimpleLineChart = () => {
         type: "line",
         data: {
           labels: [
-            "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec",
           ],
           datasets: [
             {
               label: "Price",
-              data: [120, 115, 130, 140, 135, 128, 145, 155, 150, 160, 170, 165],
+              data: [
+                120, 115, 130, 140, 135, 128, 145, 155, 150, 160, 170, 165,
+              ],
               borderColor: "#4CAF50", // Greenish trading color
               borderWidth: 2,
               tension: 0.2, // Slight curve for smoothness
