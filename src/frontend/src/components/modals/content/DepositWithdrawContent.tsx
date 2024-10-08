@@ -110,20 +110,21 @@ const DepositWithdrawForm: React.FC<{
       return "";
     }
     const payload =
-      mode === "deposit"
-        ? entryFunctions.depositFromCoinstore(
-            ECONIA_ADDR,
-            TypeTag.fromApiCoin(selectedCoin).toString(),
-            BigInt(selectedMarket.market_id),
-            BigInt(NO_CUSTODIAN),
-            BigInt(toRawCoinAmount(amount, selectedCoin.decimals).toString()),
-          )
-        : entryFunctions.withdrawToCoinstore(
-            ECONIA_ADDR,
-            TypeTag.fromApiCoin(selectedCoin).toString(),
-            BigInt(selectedMarket.market_id),
-            BigInt(toRawCoinAmount(amount, selectedCoin.decimals).toString()),
-          );
+    mode === "deposit"
+      ? entryFunctions.depositFromCoinstore(
+          ECONIA_ADDR as string, // Explicitly assert ECONIA_ADDR as a string
+          TypeTag.fromApiCoin(selectedCoin).toString(),
+          BigInt(selectedMarket.market_id),
+          BigInt(NO_CUSTODIAN),
+          BigInt(toRawCoinAmount(amount, selectedCoin.decimals).toString()),
+        )
+      : entryFunctions.withdrawToCoinstore(
+          ECONIA_ADDR as string, // Explicitly assert ECONIA_ADDR as a string
+          TypeTag.fromApiCoin(selectedCoin).toString(),
+          BigInt(selectedMarket.market_id),
+          BigInt(toRawCoinAmount(amount, selectedCoin.decimals).toString()),
+        );
+  
     await signAndSubmitTransaction({ data: payload });
   };
 
@@ -132,7 +133,7 @@ const DepositWithdrawForm: React.FC<{
       throw new Error("Generic markets not supported");
     }
     const payload = entryFunctions.registerMarketAccount(
-      ECONIA_ADDR,
+      ECONIA_ADDR as string,
       TypeTag.fromApiCoin(selectedMarket.base).toString(),
       TypeTag.fromApiCoin(selectedMarket.quote).toString(),
       BigInt(selectedMarket.market_id),
