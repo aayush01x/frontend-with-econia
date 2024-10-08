@@ -213,7 +213,7 @@ export const getStaticPaths = async () => {
   return { paths, fallback: true };
 };
 
-export const getStaticProps = async ({ params }) => {
+export const getStaticProps = async ({ params }: { params: any }) => {
   if (!params) throw new Error("No params");
   const allMarketData = await getAllMarket();
   const marketData =

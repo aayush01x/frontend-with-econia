@@ -51,7 +51,6 @@ const SimpleLineChart = () => {
             x: {
               grid: {
                 color: "rgba(200, 200, 200, 0.2)", // Light horizontal grid lines
-                drawBorder: false, // Hide x-axis border
               },
               ticks: {
                 color: "#fff", // White text for labels
@@ -62,7 +61,6 @@ const SimpleLineChart = () => {
               beginAtZero: false,
               grid: {
                 color: "rgba(200, 200, 200, 0.2)", // Light vertical grid lines
-                drawBorder: false, // Hide y-axis border
               },
               ticks: {
                 color: "#fff", // White text for labels
