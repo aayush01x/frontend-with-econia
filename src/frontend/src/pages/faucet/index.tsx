@@ -19,8 +19,8 @@ import { getAllMarket } from "@/utils/helpers";
 import { TypeTag } from "@/utils/TypeTag";
 
 const TYPE_TAGS = [
-  new TypeTag(FAUCET_ADDR, "example_apt", "ExampleAPT"),
-  new TypeTag(FAUCET_ADDR, "example_usdc", "ExampleUSDC"),
+  new TypeTag(FAUCET_ADDR as string, "example_apt", "ExampleAPT"),
+  new TypeTag(FAUCET_ADDR as string, "example_usdc", "ExampleUSDC"),
 ] as const;
 const AMOUNTS = [100, 600];
 
@@ -68,7 +68,7 @@ export default function Faucet({
       ]);
       try {
         const payload = entryFunctions.faucetMint(
-          FAUCET_ADDR,
+          FAUCET_ADDR as string,
           typeTag.toString(),
           BigInt(Math.floor(AMOUNTS[i] * 10 ** coinInfoList[i].decimals)),
         );
