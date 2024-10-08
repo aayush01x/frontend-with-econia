@@ -3,13 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "vercel-install": "./vercel-submodule-workaround.sh && pnpm install chart.js && pnpm install && ls",
-    "preinstall": "cd ../sdk; pnpm i; pnpm build; pnpm add chart.js",
+    "vercel-install": "./vercel-submodule-workaround.sh && pnpm install && ls",
+    "preinstall": "cd ../sdk; pnpm i; pnpm build",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --ignore-path .gitignore --write \"src/**/*.+(js|jsx|ts|tsx|json)\" --ignore-unknown --no-error-on-unmatched-pattern"
+    "format": "prettier --ignore-path .gitignore --write \"src/**/*.+(js|jsx|ts|tsx|json)\" --ignore-unknown --no-error-on-unmatched-pattern",
+    "postinstall": "cd ../../ && husky install src/frontend"
   },
   "dependencies": {
     "@aptos-labs/ts-sdk": "^1.13.3",
@@ -60,6 +61,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "eslint-plugin-tailwindcss": "^3.13.0",
+    "husky": "^8.0.3",
     "lint-staged": "^15.0.2",
     "postcss": "8.4.26",
     "prettier": "^2.8.8",
