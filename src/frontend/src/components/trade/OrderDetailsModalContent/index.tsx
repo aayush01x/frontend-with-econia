@@ -4,7 +4,7 @@ import React, { type ReactNode } from "react";
 import { type ApiMarket, type ApiOrder, type TradeHistory } from "@/types/api";
 import { toDecimalPrice, toDecimalSize } from "@/utils/econia";
 
-import bg from "../../../../public/bg.png";
+import bg from "../../../../public/imgg.jpg";
 import { API_URL, NETWORK_NAME } from "../../../env";
 import { TokenSymbol } from "../../TokenSymbol";
 
@@ -197,7 +197,7 @@ export const OrderDetailsModalContent: React.FC<
 
   return (
     <div
-      style={{ backgroundImage: `url(${bg.src})` }}
+      // style={{ backgroundImage: `url(${bg.src})` }}
       className="w-full bg-neutral-800 p-6"
     >
       <div className="text-center text-lg font-bold">Order Details</div>

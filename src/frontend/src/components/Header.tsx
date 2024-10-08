@@ -81,7 +81,7 @@ export function Header({
               <Image
                 className=""
                 alt="Econia Logo"
-                src="/econia.svg"
+                src="/Aptos_Primary_WHT.svg"
                 width={117}
                 height={19}
                 priority
@@ -102,14 +102,6 @@ export function Header({
                 Faucet
               </NavItem>
               <NavItemDivider />
-              <NavItem
-                className="flex items-center gap-1"
-                href="https://econia.dev"
-                external
-              >
-                <p>Docs</p>
-                <ArrowRightIcon className="inline-block h-3 w-3 -rotate-45" />
-              </NavItem>
             </div>
           </div>
 
@@ -179,14 +171,6 @@ const SlidingMenu = ({
         >
           Faucet
         </NavItem>
-        <NavItem
-          href="https://econia.dev"
-          className="flex items-center gap-1"
-          external={true}
-        >
-          <p>Docs</p>
-          <ArrowRightIcon className="inline-block h-3 w-3 -rotate-45" />
-        </NavItem>
       </div>
       <div className="px-[29.28px]">
         <ConnectedButton className="w-[182px] py-[7px] uppercase leading-[22px]">
@@ -249,7 +233,6 @@ const HeaderMobile = ({
           onClick={closeMenu}
           className="scale-101 hover:scale-96 transform transition duration-300"
         >
-          <Image src="/econia.svg" alt="logo" width={117} height={19} />
         </Link>
       </div>
 

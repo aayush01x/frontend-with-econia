@@ -4,8 +4,7 @@ export const NoticeModalContent: React.FC = () => {
       <p className="font-jost text-3xl font-bold text-white">Notice</p>
       <p className="">
         This is a testnet interface. All coins are used for testing purposes and
-        have no real value. If you are connecting a wallet, make sure it is
-        connected to Aptos testnet.
+        have no real value.
       </p>
     </div>
   );

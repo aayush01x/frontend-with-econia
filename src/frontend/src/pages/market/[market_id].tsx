@@ -1,11 +1,7 @@
-import type { GetStaticPaths, GetStaticProps } from "next";
-import dynamic from "next/dynamic";
-import Head from "next/head";
 import { useRouter } from "next/router";
-import Script from "next/script";
-import React, { useEffect, useMemo, useState } from "react";
+import Head from "next/head";
+import React, { useEffect, useState } from "react";
 
-import { DepthChart } from "@/components/DepthChart";
 import { Header } from "@/components/Header";
 import { DepositWithdrawFlowModal } from "@/components/modals/flows/DepositWithdrawFlowModal";
 import { WalletButtonFlowModal } from "@/components/modals/flows/WalletButtonFlowModal";
@@ -19,7 +15,8 @@ import { OrderEntryContextProvider } from "@/contexts/OrderEntryContext";
 import { useOrderBook } from "@/hooks/useOrderbook";
 import type { ApiMarket } from "@/types/api";
 import { getAllMarket } from "@/utils/helpers";
-
+import CandlestickChart from "@/components/charts/SimpleLineChart";
+// import CandlestickChart from "@/components/charts/CandlestickChart"; // Import the Candlestick chart
 type Props = {
   marketData: ApiMarket;
   allMarketData: ApiMarket[];
@@ -28,45 +25,6 @@ type Props = {
 type PathParams = {
   market_id: string;
 };
-export interface ChartContainerProps {
-  symbol: string;
-}
-
-export interface TVChartContainerProps {
-  selectedMarket: ApiMarket;
-  allMarketData: ApiMarket[];
-}
-
-let ChartContainer = dynamic(
-  () => {
-    try {
-      // We call `require` here for the private charting library before
-      // to facilitate SSR with a fallback to the lightweight library.
-      // If the import fails, the `catch` block is executed and we
-      // load the `LightweightChartsContainer` instead.
-      // If the library is present, the TVChartContainer component will
-      // be used, and it will load the `charting_library` module from the
-      // cache with its `require(...)`.
-      //
-      // NOTE: We must use `require` here instead of a dynamic `import`
-      // to circumvent the SSR build process failing due to an invalid path.
-      // With `import` the provided path is statically resolved at build time
-      // whereas with `require`, path resolution is deferred until runtime and can
-      // thus be conditionally resolved within a `try/catch` block.
-      require("../../../public/static/charting_library");
-      return import("@/components/trade/TVChartContainer").then(
-        (mod) => mod.TVChartContainer,
-      );
-    } catch (e) {
-      console.warn("\nFailed to load `charting_library`.");
-      console.warn("Using `lightweight-charts` instead...");
-      return import("@/components/trade/LightweightChartsContainer").then(
-        (mod) => mod.LightweightChartsContainer,
-      );
-    }
-  },
-  { ssr: true },
-);
 
 export default function Market({ allMarketData, marketData }: Props) {
   const router = useRouter();
@@ -80,22 +38,6 @@ export default function Market({ allMarketData, marketData }: Props) {
     useState<boolean>(false);
 
   const [isScriptReady, setIsScriptReady] = useState(false);
-
-  useEffect(() => {
-    if (router.query.lwc === "true") {
-      // NOTE: We may have already loaded the private charting library, but this is a feature
-      // for testing and debugging, so we don't need to check if the library is already loaded.
-      console.warn(
-        "Force loading LightweightChartsContainer. Avoid loading both libraries in production.",
-      );
-      // In a production app, you should load one or the other.
-      ChartContainer = dynamic(async () =>
-        import("@/components/trade/LightweightChartsContainer").then(
-          (mod) => mod.LightweightChartsContainer,
-        ),
-      );
-    }
-  }, [router.query]);
 
   useEffect(() => {
     const f = () => {
@@ -114,14 +56,6 @@ export default function Market({ allMarketData, marketData }: Props) {
     isFetching: orderbookIsFetching,
     isLoading: orderbookIsLoading,
   } = useOrderBook(marketData?.market_id ?? 0);
-
-  const defaultTVChartProps = useMemo(() => {
-    return {
-      symbol: `${marketData?.name ?? ""}`,
-      selectedMarket: marketData as ApiMarket,
-      allMarketData: allMarketData as ApiMarket[],
-    };
-  }, [marketData, allMarketData]);
 
   if (!allMarketData) {
     return <>Loading...</>;
@@ -156,13 +90,10 @@ export default function Market({ allMarketData, marketData }: Props) {
         )}
         <main className="flex h-full min-h-[680px] w-full grow flex-col gap-3 p-3 md:flex-row">
           <div className="flex flex-col gap-3 pb-0 md:w-[calc(100%-296px)] lg:w-[calc(100%-564px)]">
-            <div className=" flex grow flex-col border border-neutral-600">
+            <div className="flex grow flex-col border border-neutral-600">
               <div className="flex h-full min-h-[400px] md:min-h-[unset]">
-                {isScriptReady && <ChartContainer {...defaultTVChartProps} />}
-              </div>
-
-              <div className="hidden h-[140px] tall:block">
-                <DepthChart marketData={marketData} />
+                {/* Replace the old chart with CandlestickChart */}
+                <CandlestickChart />
               </div>
             </div>
             <div className="flex h-[260px] max-w-full flex-col border border-neutral-600">
@@ -235,7 +166,9 @@ export default function Market({ allMarketData, marketData }: Props) {
             <div className="border border-neutral-600">
               <OrderEntry
                 marketData={marketData}
-                onDepositWithdrawClick={() => setDepositWithdrawModalOpen(true)}
+                onDepositWithdrawClick={() =>
+                  setDepositWithdrawModalOpen(true)
+                }
               />
             </div>
             <div className="scrollbar-none mt-3 h-full max-h-full grid-rows-none overflow-hidden border border-neutral-600">
@@ -254,7 +187,6 @@ export default function Market({ allMarketData, marketData }: Props) {
           />
         </main>
       </div>
-      {/* temp */}
       <DepositWithdrawFlowModal
         selectedMarket={marketData}
         isOpen={depositWithdrawModalOpen}
@@ -271,18 +203,11 @@ export default function Market({ allMarketData, marketData }: Props) {
         }}
         allMarketData={allMarketData}
       />
-      <Script
-        src="/static/datafeeds/udf/dist/bundle.js"
-        strategy="lazyOnload"
-        onReady={() => {
-          setIsScriptReady(true);
-        }}
-      />
     </OrderEntryContextProvider>
   );
 }
 
-export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
+export const getStaticPaths = async () => {
   const allMarketData = await getAllMarket();
   const paths = allMarketData.map((market: ApiMarket) => ({
     params: { market_id: `${market.market_id}` },
@@ -290,7 +215,7 @@ export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
   return { paths, fallback: true };
 };
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps = async ({ params }) => {
   if (!params) throw new Error("No params");
   const allMarketData = await getAllMarket();
   const marketData =

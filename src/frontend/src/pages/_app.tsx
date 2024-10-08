@@ -26,8 +26,6 @@ import { useMemo } from "react";
 import { SkeletonTheme } from "react-loading-skeleton";
 import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
-
-import UnConnectedNotice from "@/components/modals/flows/UnConnectedNotice";
 import { AptosContextProvider } from "@/contexts/AptosContext";
 import { ConnectWalletContextProvider } from "@/contexts/ConnectWalletContext";
 import { store } from "@/store/store";
@@ -79,7 +77,7 @@ export default function App({ Component, pageProps }: AppProps) {
               <ConnectWalletContextProvider>
                 <style jsx global>{`
                   body {
-                    background-color: #020202;
+                    background-color: #020111;
                     background-image: url(${bg.src});
                   }
                   :root {
@@ -105,7 +103,6 @@ export default function App({ Component, pageProps }: AppProps) {
                 `}</style>
                 <div>
                   <Component {...pageProps} />
-                  <UnConnectedNotice />
                 </div>
               </ConnectWalletContextProvider>
             </AptosContextProvider>

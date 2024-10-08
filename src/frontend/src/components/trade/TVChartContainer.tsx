@@ -213,7 +213,6 @@ export const TVChartContainer: React.FC<
       library_path: "/static/charting_library/",
       theme: "Dark",
       locale: "en",
-      custom_css_url: "/styles/tradingview.css",
       timezone: Intl.DateTimeFormat().resolvedOptions().timeZone ?? "Etc/UTC",
       disabled_features: [
         "use_localstorage_for_settings",
