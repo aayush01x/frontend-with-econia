@@ -81,7 +81,10 @@ export const MarketOrderEntry: React.FC<{
 
   const { data: takerFeeDivisor } = useQuery(["takerFeeDivisor"], async () => {
     try {
-      return await viewFunctions.getTakerFeeDivisor(aptosClient, ECONIA_ADDR as string);
+      return await viewFunctions.getTakerFeeDivisor(
+        aptosClient,
+        ECONIA_ADDR as string,
+      );
     } catch (e) {
       return 2000;
     }
