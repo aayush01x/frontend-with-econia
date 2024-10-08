@@ -41,7 +41,7 @@ export class TypeTag {
     value: string | TypeTag;
   }) {
     return new TypeTag(
-      ECONIA_ADDR,
+      ECONIA_ADDR as string,
       "tablist",
       `Node<${tablistNode.key},${tablistNode.value.toString()}>`,
     );
